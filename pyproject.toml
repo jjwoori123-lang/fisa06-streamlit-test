@@ -1,0 +1,14 @@
+[project]
+name = "04-streamlit-advanced"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "finance-datareader>=0.9.101",
+    "html5lib>=1.1",
+    "setuptools>=80.9.0",
+    "streamlit-ydata-profiling>=0.2.1",
+    "ydata-profiling>=4.18.1",
+]
