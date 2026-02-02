@@ -8,7 +8,9 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "finance-datareader>=0.9.101",
     "html5lib>=1.1",
+    "neuralforecast>=3.1.4",
     "setuptools>=80.9.0",
     "streamlit-ydata-profiling>=0.2.1",
+    "torch>=2.9.1",
     "ydata-profiling>=4.18.1",
 ]
