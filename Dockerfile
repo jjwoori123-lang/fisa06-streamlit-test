@@ -1,23 +1,18 @@
 FROM python:3.11-slim
 
-# 라이브러리 빌드에 필요한 리눅스 패키지 설치 (NeuralForecast는 이게 필요할 수 있습니다)
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
-RUN pip install --upgrade pip
+# 1. 필수 라이브러리 및 CPU용 torch 설치 (용량 다이어트 핵심)
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir neuralforecast
 
-# requirements.txt 설치 + 누락된 neuralforecast 추가 설치
+# 2. 나머지 라이브러리 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install --no-cache-dir neuralforecast
 
+# 3. 소스 복사
 COPY . .
 
-EXPOSE 8501
-
-# 실행 파일이 app.py이므로 이름을 맞춰줍니다.
-# Dockerfile 마지막 줄 수정 추천
+# 4. 실행 (Render용 포트 설정)
 ENTRYPOINT ["sh", "-c", "streamlit run app.py --server.port $PORT --server.address 0.0.0.0"]
