@@ -19,4 +19,5 @@ COPY . .
 EXPOSE 8501
 
 # 실행 파일이 app.py이므로 이름을 맞춰줍니다.
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Dockerfile 마지막 줄 수정 추천
+ENTRYPOINT ["sh", "-c", "streamlit run app.py --server.port $PORT --server.address 0.0.0.0"]
